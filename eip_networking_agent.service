@@ -1,0 +1,12 @@
+[Unit]
+Description=eip neutron event handler
+After=neutron-server.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/eip_networking_agent
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,25 @@
+# Packages
+*.egg
+*.egg-info
+dist
+build
+.eggs
+eggs
+bin
+parts
+bin
+var
+sdist
+developp-eggs
+.installed.cfg
+lib
+lib64
+CMD
+
+# Editors
+*~
+.*.swp
+.*sw?
+
+# Python
+*.pyc

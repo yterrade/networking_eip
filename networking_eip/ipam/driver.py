@@ -60,6 +60,10 @@ def retrieveContainersFromNeutron(function):
 		        args[0].pool_json = connector.NeutronConnector().get_connector().list_subnetpools(id=args[0].subnet_json['subnetpool_id'])['subnetpools'][0]
 		        args[0].scope_json = connector.NeutronConnector().get_connector().list_address_scopes(id=args[0].pool_json['address_scope_id'])['address_scopes'][0]
 
+		if args[0].scope_json is None:
+			# This subnet is not complient with our IPAM : it has no site
+	                LOG.error("Failed : to retrieve "+subnet_id+" in IPAM")
+        	        raise neutron_lib_exc.SubnetNotFound(subnet_id=subnet_id)
 
 		args[0].sitename = args[0].scope_json['name']
 
@@ -277,7 +281,7 @@ class eipPool(neutron_subnet_alloc.SubnetAllocator):
 		for p in subnet_from_request.pools:
 			start_ip,_,end_ip = str(p).partition('-')
 			a = netaddr.IPRange(start_ip,end_ip)
-			LOG.error("Add to new_pools : "+str(a))
+			LOG.info("Add to new_pools : "+str(a))
 			new_pools.add(a)
 
 
@@ -386,8 +390,6 @@ class eipSubnet(driver.Subnet):
     def __init__(self,request):
 	LOG.info("Init an eip subnet")
 	req_dict = request.__dict__
-#	for k in req_dict:
-#		LOG.error("k "+k + "  v "+str(req_dict[k]))
 	self.gateway_ip = req_dict.get('_gateway_ip',None)
 	self.cidr = req_dict.get('_subnet_cidr',None)
 	self.prefixlen = req_dict.get('_prefixlen',None)

@@ -24,7 +24,7 @@ class eipSubnetRequestFactory(neutron_requests.SubnetRequestFactory):
 	# call neutron original get_request, we just want to append the subnet name
 	# and the subnetpool name to it
 	request  = super(eipSubnetRequestFactory, cls).get_request(context,subnet,subnetpool)
-	# see neutron/db/cb_base_plugin_common.py to know the extra data we can happen
+	# see neutron/db/cb_base_plugin_common.py to know the extra data we can append
 	# (_make_subnet_dict)
 	request.subnet_name = subnet.get('name')
 

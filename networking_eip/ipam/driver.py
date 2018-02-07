@@ -28,6 +28,7 @@ from neutron.ipam import driver
 from neutron_lib import exceptions as neutron_lib_exc
 from neutron.ipam import requests as neutron_ipam_req
 from neutron.ipam import subnet_alloc as neutron_subnet_alloc
+from neutron.ipam import exceptions as ipam_exc
 
 from networking_eip.neutron_connector import connector
 from networking_eip.subnet_factory import subnet_factory

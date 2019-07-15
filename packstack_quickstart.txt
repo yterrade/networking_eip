@@ -1,2 +1,9 @@
 After running packstack --allinone, source /root/keystonerc_admin file
 All the needed variables to configure neutron can be found in /root/keystonerc_admin
+Run pip install git+https://github.com/yterrade/networking_eip.git
+cp /usr/bin/eip_networking_agent  /usr/lib/systemd/system
+systemctl enable eip_networking_agent
+systemctl start eip_networking_agent
+systemctl restart httpd
+systemctl restart neutron-server
+systemctl restart openstack-nova-compute

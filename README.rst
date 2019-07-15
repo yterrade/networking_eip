@@ -19,6 +19,7 @@ Quick configuration guide
 OpenStack
 ---------
 In /etc/systemd/system/multi-user.target.wants/neutron-server.service, set PrivateTmp = false
+
 Source keystonerc_admin
 
 Neutron

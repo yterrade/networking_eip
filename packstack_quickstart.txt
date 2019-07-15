@@ -1,0 +1,2 @@
+After running packstack --allinone, source /root/keystonerc_admin file
+All the needed variables to configure neutron can be found in /root/keystonerc_admin
